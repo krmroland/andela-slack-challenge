@@ -50,10 +50,15 @@ module.exports = {
             },
             {
                 test: /\.(jpg|jpeg|png)/,
-                loader: "file-loader",
-                options: {
-                    name: "images/[name].[hash].[ext]"
-                }
+                loaders: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "images/[name].[hash].[ext]"
+                        }
+                    },
+                    "img-loader"
+                ]
             }
         ]
     },
