@@ -8,7 +8,7 @@ module.exports = {
     entry: ["./src/js/app.js", "./src/sass/app.scss"],
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "[name].js"
+        filename: "app.js"
     },
 
     module: {
