@@ -4,6 +4,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const webpack = require("webpack");
 
+const HandlebarsPlugin = require("handlebars-webpack-plugin");
+
 module.exports = {
     entry: ["./src/js/app.js", "./src/sass/app.scss"],
     output: {
@@ -52,6 +54,16 @@ module.exports = {
             filename: "app.css",
             allChunks: true
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new HandlebarsPlugin({
+            // path to hbs entry file(s)
+            entry: path.join(process.cwd(), "src", "ui", "*.hbs"),
+            // output path and filename(s)
+            // if ommited, the input filepath stripped of its extension will be used
+            output: path.join(process.cwd(), "dist", "[name].html"),
+
+            // globbed path to partials, where folder/filename is unique
+            partials: [path.join(process.cwd(), "src", "ui", "*", "*.hbs")]
+        })
     ]
 };
