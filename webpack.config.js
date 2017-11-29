@@ -3,11 +3,12 @@ const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const webpack = require("webpack");
+const CLeanWebPackPlugin = require("clean-webpack-plugin");
 
 const HandlebarsPlugin = require("handlebars-webpack-plugin");
-
+const WebpackNotifierPlugin = require("webpack-notifier");
 module.exports = {
-    entry: ["./src/js/app.js", "./src/sass/app.scss"],
+    entry: ["./src/js/app.js", "./src/ui/sass/app.scss"],
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "app.js"
@@ -46,6 +47,13 @@ module.exports = {
                     fallback: "style-loader",
                     use: ["css-loader", "sass-loader"]
                 })
+            },
+            {
+                test: /\.(jpg|jpeg|png)/,
+                loader: "file-loader",
+                options: {
+                    name: "images/[name].[hash].[ext]"
+                }
             }
         ]
     },
@@ -54,6 +62,12 @@ module.exports = {
             filename: "app.css",
             allChunks: true
         }),
+        new WebpackNotifierPlugin({
+            title: "Aspiring Andelians",
+            alwaysNotify: true,
+            contentImage: path.resolve(__dirname, "andela.png")
+        }),
+        new CLeanWebPackPlugin(["dist"]),
         new webpack.HotModuleReplacementPlugin(),
         new HandlebarsPlugin({
             // path to hbs entry file(s)
