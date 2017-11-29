@@ -10,6 +10,10 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         filename: "app.js"
     },
+    devServer: {
+        hot: true,
+        contentBase: "./dist"
+    },
 
     module: {
         rules: [
@@ -31,6 +35,7 @@ module.exports = {
         new ExtractTextPlugin({
             filename: "app.css",
             allChunks: true
-        })
+        }),
+        new webpack.HotModuleReplacementPlugin()
     ]
 };
