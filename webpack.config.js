@@ -8,6 +8,8 @@ const CLeanWebPackPlugin = require("clean-webpack-plugin");
 const HandlebarsPlugin = require("handlebars-webpack-plugin");
 
 const WebpackNotifierPlugin = require("webpack-notifier");
+const PurifyCSSPlugin = require("purifycss-webpack");
+const glob = require("glob-all");
 
 config = {
     entry: ["./src/js/app.js", "./src/ui/sass/app.scss"],
@@ -85,11 +87,15 @@ config = {
             output: path.join(process.cwd(), "dist", "[name].html"),
 
             // globbed path to partials, where folder/filename is unique
-            partials: [path.join(process.cwd(), "src", "ui", "*", "*.hbs")],
-
-            onBeforeSave: (Handlebars, resultHtml, filename) => {
-                console.log(resultHtml);
-            }
+            partials: [path.join(process.cwd(), "src", "ui", "*", "*.hbs")]
+        }),
+        new PurifyCSSPlugin({
+            // Give paths to parse for rules. These should be absolute!
+            paths: glob.sync([
+                "./src/ui/sections/*.hbs",
+                "./src/ui/icons/*.hbs",
+                "./src/ui/*.hbs"
+            ])
         })
     ]
 };
