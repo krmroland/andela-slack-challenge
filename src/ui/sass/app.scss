@@ -1,0 +1,13 @@
+// $primary: #5f00e3 !default;
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import "bootstrap";
+
+@import "sections/sections";
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+.btn:hover {
+    cursor: pointer;
+}

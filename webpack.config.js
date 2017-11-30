@@ -6,8 +6,10 @@ const webpack = require("webpack");
 const CLeanWebPackPlugin = require("clean-webpack-plugin");
 
 const HandlebarsPlugin = require("handlebars-webpack-plugin");
+
 const WebpackNotifierPlugin = require("webpack-notifier");
-module.exports = {
+
+config = {
     entry: ["./src/js/app.js", "./src/ui/sass/app.scss"],
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -48,13 +50,14 @@ module.exports = {
                     use: ["css-loader", "sass-loader"]
                 })
             },
+
             {
-                test: /\.(jpg|jpeg|png)/,
+                test: /\.(jpg|jpeg|png|gif)/,
                 loaders: [
                     {
                         loader: "file-loader",
                         options: {
-                            name: "images/[name].[hash].[ext]"
+                            name: "images/[name].[ext]"
                         }
                     },
                     "img-loader"
@@ -82,7 +85,13 @@ module.exports = {
             output: path.join(process.cwd(), "dist", "[name].html"),
 
             // globbed path to partials, where folder/filename is unique
-            partials: [path.join(process.cwd(), "src", "ui", "*", "*.hbs")]
+            partials: [path.join(process.cwd(), "src", "ui", "*", "*.hbs")],
+
+            onBeforeSave: (Handlebars, resultHtml, filename) => {
+                console.log(resultHtml);
+            }
         })
     ]
 };
+
+module.exports = config;
