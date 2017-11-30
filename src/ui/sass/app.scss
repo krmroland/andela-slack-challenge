@@ -1,11 +1,13 @@
-// $primary: #5f00e3 !default;
+$primary: #5f00e3 !default;
+$border-radius: 0;
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import "bootstrap";
 
-@import "sections/sections";
+@import "custom";
 
 body {
     font-family: "Roboto", sans-serif;
+    color: #343a40;
 }
 
 .btn:hover {
