@@ -6,7 +6,10 @@
   "scripts": {
     "watch": "NODE_ENV=development webpack --watch --hide-modules --progress",
     "start": "NODE_ENV=development webpack-dev-server --open",
-    "production": "NODE_ENV=production webpack --hide-modules --progress"
+    "production": "NODE_ENV=production webpack --hide-modules --progress",
+    "deploy":
+      "NODE_DEBUG=gh-pages npm run production && npm run cleanup && gh-pages -d dist",
+    "cleanup": "rm -rf node_modules/gh-pages/.cache"
   },
   "keywords": [],
   "author": "",
@@ -22,16 +25,17 @@
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.5",
+    "gh-pages": "^1.0.0",
     "glob-all": "^3.1.0",
     "handlebars-webpack-plugin": "^1.3.0",
     "image-loader": "^0.0.1",
     "node-sass": "^4.5.3",
+    "purify-css": "^1.2.5",
+    "purifycss-webpack": "^0.7.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.5",
-    "webpack-notifier": "^1.5.0",
-    "purify-css": "^1.2.5",
-    "purifycss-webpack": "^0.7.0"
+    "webpack-notifier": "^1.5.0"
   }
 }
