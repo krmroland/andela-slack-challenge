@@ -11,14 +11,17 @@ const WebpackNotifierPlugin = require("webpack-notifier");
 const PurifyCSSPlugin = require("purifycss-webpack");
 const glob = require("glob-all");
 
-config = {
+const inProdution = !!(process.env.NODE_ENV === "production");
+const inDevelopment = !!(process.env.NODE_ENV === "development");
+
+const config = {
     entry: ["./src/js/app.js", "./src/ui/sass/app.scss"],
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "app.js"
     },
     devServer: {
-        hot: true,
+        hot: inDevelopment,
         contentBase: "./dist",
         stats: {
             colors: true,
@@ -78,7 +81,7 @@ config = {
             contentImage: path.resolve(__dirname, "andela.png")
         }),
         new CLeanWebPackPlugin(["dist"]),
-        new webpack.HotModuleReplacementPlugin(),
+
         new HandlebarsPlugin({
             // path to hbs entry file(s)
             entry: path.join(process.cwd(), "src", "ui", "*.hbs"),
@@ -95,9 +98,19 @@ config = {
                 "./src/ui/sections/*.hbs",
                 "./src/ui/icons/*.hbs",
                 "./src/ui/*.hbs"
-            ])
+            ]),
+            purifyOptions: {
+                minify: inProdution
+            }
         })
     ]
 };
 
+if (inProdution) {
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+}
+
+if (inDevelopment) {
+    config.plugins.push(new webpack.HotModuleReplacementPlugin());
+}
 module.exports = config;
