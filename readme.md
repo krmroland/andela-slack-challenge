@@ -24,7 +24,8 @@ Adelan's,
 
 **I used modern front end development tools like
 [handlebars](http://handlebarsjs.com/) for templating and
-[webpack](https://webpack.js.org/) for module bundling**
+[webpack](https://webpack.js.org/) for module bundling
+and sass for styling. ***
 
 ## Getting Started
 
