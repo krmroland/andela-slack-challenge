@@ -3,7 +3,7 @@
 In a certain [slack](https://aspiringandelans.slack.com/) group for aspiring
 Adelan's,
 
-## A working demo can be found [here](https://krmroland.github.io/bootstrap-slack-challenge/)
+## A working demo can be found [here](https://krmroland.github.io/andela-slack-challenge/)
 
 * The challenge one was as follows.
   * Create a github repo for this task. Create a branch name it gh-pages and
